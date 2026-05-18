@@ -1,0 +1,34 @@
+# Example volumetric-qc config — overrides the SHIELD preset with project-specific tweaks.
+# Run with: volumetric-qc run sample.zarr --config examples/qc_config.yaml
+
+preset: shield
+
+# Tighten thresholds compared to the SHIELD preset defaults.
+thresholds:
+  intensity_drift_max: 0.20
+  channel_bleed_corr_max: 0.30
+  registration_shift_max_voxels: 1.5
+  stripe_energy_ratio_max: 0.15
+  bubbles_per_slice_max: 3
+
+sampling:
+  z_stride: 1
+  xy_downsample: 2
+  blob_z_sample: 16
+  fft_tile_size: 512
+  random_seed: 7
+
+metrics:
+  intensity: true
+  sharpness: true
+  background: true
+  channel_bleed: true
+  registration: true
+  stripes: true
+  bubbles: true
+  folding: true
+  clearing_residue: true
+
+# Human-readable channel labels — order must match the volume's channel axis.
+channels: [DAPI, GFP, RFP]
+voxel_size_um: [4.0, 1.6, 1.6]

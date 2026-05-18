@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  qc:
+    build: .
+    image: volumetric-qc:latest
+    container_name: volumetric-qc
+    volumes:
+      - ./data:/data:ro
+      - ./output:/output
+    command: ["--help"]
+
+  qc-run:
+    image: volumetric-qc:latest
+    profiles: ["run"]
+    volumes:
+      - ./data:/data:ro
+      - ./output:/output
+    command:
+      - run
+      - /data/sample.zarr
+      - --preset
+      - shield
+      - --output
+      - /output/sample
+
+  qc-batch:
+    image: volumetric-qc:latest
+    profiles: ["batch"]
+    volumes:
+      - ./data:/data:ro
+      - ./output:/output
+    command:
+      - batch
+      - /data
+      - --preset
+      - shield
+      - --output
+      - /output
+
+  qc-demo:
+    image: volumetric-qc:latest
+    profiles: ["demo"]
+    volumes:
+      - ./output:/output
+    entrypoint: ["python", "scripts/generate_demo_dashboard.py"]

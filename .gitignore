@@ -1,0 +1,31 @@
+# Build / packaging
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+coverage.xml
+.mypy_cache/
+.ruff_cache/
+
+# Output artifacts
+output/
+demo_output/
+qc_output/
+qc_batch/
+*.zarr/
+*.nii
+*.nii.gz
+*.nrrd
+average_template_25.nrrd
+
+# Editor + OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Notebook checkpoints
+.ipynb_checkpoints/
